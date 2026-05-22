@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 
-const MAP_API = "https://fumo.touhouspots.com/api/map/posts?refresh=100";
+const MAP_API = "https://fumo.touhouspots.com/api/map/posts";
 const POST_API = "https://fumo.touhouspots.com/api/posts/";
 
 // 🔒 Grab the webhook from the environment, crash immediately if it's missing
@@ -49,6 +49,8 @@ async function sendDiscordAlert(detail) {
     embeds: [
       {
         title: detail.title || "Unnamed Fumo Spot",
+        // This makes the title itself a clickable blue link!
+        url: `https://fumo.touhouspots.com/?panel=post&post=${detail.id}`,
         description: detail.body || "No description provided.",
         color: 16711680,
         fields: [
