@@ -29,6 +29,7 @@ jobs:
             echo "1. Fetch latest code from GitHub"
             git fetch origin main
             git reset --hard origin/main
+            echo "WEBHOOK_URL=${{ secrets.WEBHOOK_URL }}" > .env
             chmod +x deploy.sh
             ./deploy.sh
 
