@@ -5,10 +5,6 @@ set -e
 
 echo "🚀 Starting Swiss Fumo Radar Deployment..."
 
-# 1. Fetch latest code from GitHub
-git fetch origin main
-git reset --hard origin main
-
 # 2. Rebuild and restart the container without downtime
 # --build forces Docker to re-read any changes in index.js
 # -d keeps it detached in the background

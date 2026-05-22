@@ -24,6 +24,12 @@ jobs:
           capture_stdout: true
           script: |
             cd /main/SwissFumoSpotRadar
+            echo "🚀 Starting Swiss Fumo Radar Deployment..."
+
+            echo "1. Fetch latest code from GitHub"
+            git fetch origin main
+            git reset --hard origin main
+
             ./deploy.sh
 
       - name: Use captured output
