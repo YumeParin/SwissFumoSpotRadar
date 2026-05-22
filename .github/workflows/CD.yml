@@ -1,0 +1,30 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Run remote deploy commands
+    runs-on: ubuntu-latest
+    environment: PRODUCTION
+    steps:
+      - name: Execute remote deploy script
+        uses: appleboy/ssh-action@v1
+        id: ssh
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          capture_stdout: true
+          script: |
+            cd /main/SwissFumoSpotRadar
+            ./deploy.sh
+
+      - name: Use captured output
+        run: echo "SSH output was ${{ steps.ssh.outputs.stdout }}"
