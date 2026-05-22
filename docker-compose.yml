@@ -1,0 +1,12 @@
+services:
+  fumo-radar:
+    build: .
+    container_name: swiss-fumo-radar
+    restart: unless-stopped
+    environment:
+      # We will pull this from a local .env file
+      - WEBHOOK_URL=${WEBHOOK_URL}
+    volumes:
+      # This maps the container's /data folder to a local /data folder on your VPS
+      # This prevents your seen_ids.json from being deleted if the container restarts!
+      - ./data:/usr/src/app/data
